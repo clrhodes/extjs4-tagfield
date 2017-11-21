@@ -1,6 +1,6 @@
 /*
 
-This file contains example usages of the Ext.ux.form.field.BoxSelect component, and is based on the
+This file contains example usages of the Ext.ux.form.field.Tag component, and is based on the
 examples of comboboxes provided in Ext JS 4.
 
 */

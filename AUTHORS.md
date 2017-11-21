@@ -1,0 +1,6 @@
+Kevin Vaughan (kveeiv, http://www.sencha.com/forum/member.php?29437-kveeiv)
+kleins (http://www.sencha.com/forum/member.php?77882-kleins)
+JorisA (http://www.sencha.com/forum/member.php?2016-JorisA)
+moritori (https://github.com/moritori)
+Christopher Rhodes (clrhodes, https://github.com/clrhodes)
+Shayne Trosdahl (Trozdol, https://github.com/Trozdol)

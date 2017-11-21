@@ -72,7 +72,7 @@ BoxSelectExample = {
                 items: [{
                     title: 'Primary States',
                     items: [{
-                        xtype: 'boxselect',
+                        xtype: 'tagfield',
                         itemId: 'PrimaryStates',
                         name: 'PrimaryStates',
                         fieldLabel: 'Select Multiple States',
@@ -109,7 +109,7 @@ BoxSelectExample = {
                     title: 'Backup States (Optional)',
                     collapsed: true,
                     items: [{
-                        xtype: 'boxselect',
+                        xtype: 'tagfield',
                         name: 'BackupStates',
                         fieldLabel: 'Select Multiple States',
                         queryMode: 'local',

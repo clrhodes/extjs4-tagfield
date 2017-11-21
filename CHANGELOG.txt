@@ -1,16 +1,32 @@
 CURRENT RELEASE
 ---------------
 
+v0.0.1 - 2017-11-21
+Changes:
+* Renamed JS from BoxSelect.js to Tag.js
+* Renamed CSS to BoxSelect.css to Tag.css
+* Renamed class to Ext.ux.form.field.Tag
+* Set alternateClassName to Ext.ux.form.field.BoxSelect for compatability
+* Updated directory paths to follow Ext.Loader naming conventions
+* Added alias 'widget.tagfield' for forward compatability
+* Updated CSS selectors to use tagfield instead of boxselect
+* Updated Tag.js to use tagfield CSS classes
+* Replaced references to 'boxselect' with 'tagfield' in examples
+* Updated README.md and AUTHORS.md
+Bug Fixes:
+* Compatability with Ext JS 4.2
+* Updated references to Cloudflare CDN
+Pull Requests Merged:
+* https://github.com/kveeiv/extjs-boxselect/pull/31
+
+Previous Updates
+----------------
 v2.0.3 - 24 Jul 2012
 Bug Fixes:
 * Resolved field layout issues in complex container layouts
 * Resolved destruction order to prevent javascript errors from sometimes occurring
 Documentation
 * Added button control to examples to show component configurations inline
-
-
-Previous Updates
-----------------
 
 v2.0.2 - 10 Jul 2012
 Enhancements:

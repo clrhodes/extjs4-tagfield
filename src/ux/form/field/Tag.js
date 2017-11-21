@@ -1,43 +1,32 @@
 /**
- * BoxSelect for ExtJS 4.1, a combo box improved for multiple value querying, selection and management.
+ * Tag field for ExtJS 4.1+.
  *
- * A friendlier combo box for multiple selections that creates easily individually
- * removable labels for each selection, as seen on facebook and other sites. Querying
- * and type-ahead support are also improved for multiple selections.
+ * A forward compatabile version of the Ext JS 5 and 6 tagfield component. Not compatabile with earlier
+ * versions of Ext JS 4.
  *
- * Options and usage mostly remain consistent with the standard
- * [ComboBox](http://docs.sencha.com/ext-js/4-1/#!/api/Ext.form.field.ComboBox) control.
- * Some default configuration options have changed, but most should still work properly
- * if overridden unless otherwise noted.
- *
- * Please note, this component does not support versions of ExtJS earlier than 4.1.
- *
- * Inspired by the [SuperBoxSelect component for ExtJS 3](http://technomedia.co.uk/SuperBoxSelect/examples3.html),
- * which in turn was inspired by the [BoxSelect component for ExtJS 2](http://efattal.fr/en/extjs/extuxboxselect/).
- *
- * Various contributions and suggestions made by many members of the ExtJS community which can be seen
- * in the [official user extension forum post](http://www.sencha.com/forum/showthread.php?134751-Ext.ux.form.field.BoxSelect).
+ * Credit to https://github.com/kveeiv/extjs-boxselect and the Ext JS community.
  *
  * Many thanks go out to all of those who have contributed, this extension would not be
  * possible without your help.
  *
- * See [AUTHORS.txt](../AUTHORS.TXT) for a list of major contributors
- *
+ * @author clrhodes https://github.com/clrhodes
+ * @author trosdahl https://github.com/Trozdol
  * @author kvee_iv http://www.sencha.com/forum/member.php?29437-kveeiv
- * @version 2.0.3
- * @requires BoxSelect.css
- * @xtype boxselect
+ * @version 0.0.1
+ * @requires Tag.css
+ * @xtype tagfield
  *
  */
-Ext.define('Ext.ux.form.field.BoxSelect', {
+Ext.define('Ext.ux.form.field.Tag', {
     extend:'Ext.form.field.ComboBox',
-    alias: ['widget.comboboxselect', 'widget.boxselect'],
+    alternateClassName: ['Ext.ux.form.field.BoxSelect'],
+    alias: ['widget.tagfield', 'widget.comboboxselect', 'widget.boxselect'],
     requires: ['Ext.selection.Model', 'Ext.data.Store'],
 
     //
     // Begin configuration options related to the underlying store
     //
-    
+
     /**
      * @cfg {String} valueParam
      * The name of the parameter used to load unknown records into the store. If left unspecified, {@link #valueField}
@@ -71,7 +60,7 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
      */
 
     /**
-	 * @cfg
+     * @cfg
      * @inheritdoc
      *
      * When {@link #forceSelection} is `false`, new records can be created by the user as they
@@ -79,22 +68,22 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
      * is triggered by typing the configured 'delimiter', and can be further configured using the
      * {@link #createNewOnEnter} and {@link #createNewOnBlur} configuration options.
      *
-     * This functionality is primarily useful with BoxSelect components for things
+     * This functionality is primarily useful with the tag field for things
      * such as an email address.
      */
     forceSelection: true,
 
     /**
-	 * @cfg {Boolean}
+     * @cfg {Boolean}
      * Has no effect if {@link #forceSelection} is `true`.
      *
-	 * With {@link #createNewOnEnter} set to `true`, the creation described in
+     * With {@link #createNewOnEnter} set to `true`, the creation described in
      * {@link #forceSelection} will also be triggered by the 'enter' key.
-	 */
+     */
     createNewOnEnter: false,
 
     /**
-	 * @cfg {Boolean}
+     * @cfg {Boolean}
      * Has no effect if {@link #forceSelection} is `true`.
      *
      * With {@link #createNewOnBlur} set to `true`, the creation described in
@@ -103,8 +92,8 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
      * Please note that this behavior is also affected by the configuration options
      * {@link #autoSelect} and {@link #selectOnTab}. If those are true and an existing
      * item would have been selected as a result, the partial text the user has entered will
-	 * be discarded and the existing item will be added to the selection.
-	 */
+     * be discarded and the existing item will be added to the selection.
+     */
     createNewOnBlur: false,
 
     /**
@@ -137,19 +126,19 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     triggerOnClick: true,
 
     /**
-	 * @cfg {Boolean}
+     * @cfg {Boolean}
      * - `true` to have each selected value fill to the width of the form field
      * - `false to have each selected value size to its displayed contents
-	 */
+     */
     stacked: false,
 
     /**
-	 * @cfg {Boolean}
+     * @cfg {Boolean}
      * Has no effect if {@link #multiSelect} is `false`
      *
      * `true` to keep the pick list expanded after each selection from the pick list
      * `false` to automatically collapse the pick list after a selection is made
-	 */
+     */
     pinList: true,
 
     /**
@@ -208,14 +197,14 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     /**
      * @cfg growAppend
      * @hide
-     * Currently unsupported by BoxSelect since this is used for horizontal growth and
-     * BoxSelect only supports vertical growth.
+     * Currently unsupported by tagfield since this is used for horizontal growth and
+     * tagfield only supports vertical growth.
      */
     /**
      * @cfg growToLongestValue
      * @hide
-     * Currently unsupported by BoxSelect since this is used for horizontal growth and
-     * BoxSelect only supports vertical growth.
+     * Currently unsupported by tagfield since this is used for horizontal growth and
+     * tagfield only supports vertical growth.
      */
 
     //
@@ -232,7 +221,7 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
      * Fires when the **{@link #autoSize}** function is triggered and the field is resized according to the
      * {@link #grow}/{@link #growMin}/{@link #growMax} configs as a result. This event provides a hook for the
      * developer to apply additional logic at runtime to resize the field if needed.
-     * @param {Ext.ux.form.field.BoxSelect} this This BoxSelect field
+     * @param {Ext.ux.form.field.Tag} this This tag field
      * @param {Number} height The new field height
      */
 
@@ -250,9 +239,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
      * @private
      */
     fieldSubTpl: [
-        '<div id="{cmpId}-listWrapper" class="x-boxselect {fieldCls} {typeCls}">',
-        '<ul id="{cmpId}-itemList" class="x-boxselect-list">',
-        '<li id="{cmpId}-inputElCt" class="x-boxselect-input">',
+        '<div id="{cmpId}-listWrapper" class="x-tagfield {fieldCls} {typeCls}">',
+        '<ul id="{cmpId}-itemList" class="x-tagfield-list">',
+        '<li id="{cmpId}-inputElCt" class="x-tagfield-input">',
         '<div id="{cmpId}-emptyEl" class="{emptyCls}">{emptyText}</div>',
         '<input id="{cmpId}-inputEl" type="{type}" ',
         '<tpl if="name">name="{name}" </tpl>',
@@ -260,7 +249,7 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
         '<tpl if="size">size="{size}" </tpl>',
         '<tpl if="tabIdx">tabIndex="{tabIdx}" </tpl>',
         '<tpl if="disabled"> disabled="disabled"</tpl>',
-        'class="x-boxselect-input-field {inputElCls}" autocomplete="off">',
+        'class="x-tagfield-input-field {inputElCls}" autocomplete="off">',
         '</li>',
         '</ul>',
         '</div>',
@@ -278,19 +267,19 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     /**
      * @private
      */
-    componentLayout: 'boxselectfield',
+    componentLayout: 'tag',
 
     /**
      * @private
      */
-    emptyInputCls: 'x-boxselect-emptyinput',
+    emptyInputCls: 'x-tagfield-emptyinput',
 
     /**
      * @inheritdoc
      *
      * Initialize additional settings and enable simultaneous typeAhead and multiSelect support
      * @protected
-	 */
+     */
     initComponent: function() {
         var me = this,
         typeAhead = me.typeAhead;
@@ -322,9 +311,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Register events for management controls of labelled items
+     * Register events for management controls of labelled items
      * @protected
-	 */
+     */
     initEvents: function() {
         var me = this;
 
@@ -353,9 +342,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     /**
      * @inheritdoc
      *
-	 * Create a store for the records of our current value based on the main store's model
+     * Create a store for the records of our current value based on the main store's model
      * @protected
-	 */
+     */
     onBindStore: function(store, initial) {
         var me = this;
 
@@ -400,9 +389,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     /**
      * @inheritdoc
      *
-	 * Add refresh tracking to the picker for selection management
+     * Add refresh tracking to the picker for selection management
      * @protected
-	 */
+     */
     createPicker: function() {
         var me = this,
         picker = me.callParent(arguments);
@@ -413,7 +402,7 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
         });
 
         if (me.filterPickList) {
-            picker.addCls('x-boxselect-hideselections');
+            picker.addCls('x-tagfield-hideselections');
         }
 
         return picker;
@@ -422,9 +411,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     /**
      * @inheritdoc
      *
-	 * Clean up selected values management controls
+     * Clean up selected values management controls
      * @protected
-	 */
+     */
     onDestroy: function() {
         var me = this;
 
@@ -459,9 +448,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     /**
      * @inheritdoc
      *
-	 * Overridden to avoid use of placeholder, as our main input field is often empty
+     * Overridden to avoid use of placeholder, as our main input field is often empty
      * @protected
-	 */
+     */
     afterRender: function() {
         var me = this;
 
@@ -481,11 +470,11 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
         }
 
         if (me.stacked === true) {
-            me.itemList.addCls('x-boxselect-stacked');
+            me.itemList.addCls('x-tagfield-stacked');
         }
 
         if (!me.multiSelect) {
-            me.itemList.addCls('x-boxselect-singleselect');
+            me.itemList.addCls('x-tagfield-singleselect');
         }
 
         me.applyMultiselectItemMarkup();
@@ -494,12 +483,12 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Overridden to search entire unfiltered store since already selected values
+     * Overridden to search entire unfiltered store since already selected values
      * can span across multiple store page loads and other filtering. Overlaps
      * some with {@link #isFilteredRecord}, but findRecord is used by the base component
      * for various logic so this logic is applied here as well.
      * @protected
-	 */
+     */
     findRecord: function(field, value) {
         var ds = this.store,
         matches;
@@ -516,10 +505,10 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Overridden to map previously selected records to the "new" versions of the records
-	 * based on value field, if they are part of the new store load
+     * Overridden to map previously selected records to the "new" versions of the records
+     * based on value field, if they are part of the new store load
      * @protected
-	 */
+     */
     onLoad: function() {
         var me = this,
         valueField = me.valueField,
@@ -551,7 +540,7 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Used to determine if a record is filtered out of the current store's data set,
+     * Used to determine if a record is filtered out of the current store's data set,
      * for determining if a currently selected value should be retained.
      *
      * A record is considered filtered and should be retained if:
@@ -560,8 +549,8 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
      *   (Happens when our selected value is just part of a different load, page or query)
      *   (Happens when our selected value was created manually)
      *
-	 * @private
-	 */
+     * @private
+     */
     isFilteredRecord: function(record) {
         var me = this,
         valueField = me.valueField,
@@ -574,9 +563,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     /**
      * @inheritdoc
      *
-	 * Overridden to allow for continued querying with multiSelect selections already made
+     * Overridden to allow for continued querying with multiSelect selections already made
      * @protected
-	 */
+     */
     doRawQuery: function() {
         var me = this,
         rawValue = me.inputEl.dom.value;
@@ -589,19 +578,19 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * When the picker is refreshing, we should ignore selection changes. Otherwise
-	 * the value of our field will be changing just because our view of the choices is.
+     * When the picker is refreshing, we should ignore selection changes. Otherwise
+     * the value of our field will be changing just because our view of the choices is.
      * @protected
-	 */
+     */
     onBeforeListRefresh: function() {
         this.ignoreSelection++;
     },
 
     /**
-	 * When the picker is refreshing, we should ignore selection changes. Otherwise
-	 * the value of our field will be changing just because our view of the choices is.
+     * When the picker is refreshing, we should ignore selection changes. Otherwise
+     * the value of our field will be changing just because our view of the choices is.
      * @protected
-	 */
+     */
     onListRefresh: function() {
         this.callParent(arguments);
         if (this.ignoreSelection > 0) {
@@ -610,10 +599,10 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Overridden to preserve current labelled items when list is filtered/paged/loaded
-	 * and does not include our current value. See {@link #isFilteredRecord}
+     * Overridden to preserve current labelled items when list is filtered/paged/loaded
+     * and does not include our current value. See {@link #isFilteredRecord}
      * @private
-	 */
+     */
     onListSelectionChange: function(list, selectedRecords) {
         var me = this,
         valueStore = me.valueStore,
@@ -690,7 +679,7 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Overridden to align to itemList size instead of inputEl
+     * Overridden to align to itemList size instead of inputEl
      */
     doAlign: function(){
         var me = this,
@@ -727,9 +716,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Get the current cursor position in the input field, for key-based navigation
-	 * @private
-	 */
+     * Get the current cursor position in the input field, for key-based navigation
+     * @private
+     */
     getCursorPosition: function() {
         var cursorPos;
         if (Ext.isIE) {
@@ -744,9 +733,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Check to see if the input field has selected text, for key-based navigation
-	 * @private
-	 */
+     * Check to see if the input field has selected text, for key-based navigation
+     * @private
+     */
     hasSelectedText: function() {
         var sel, range;
         if (Ext.isIE) {
@@ -759,7 +748,7 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Handles keyDown processing of key-based selection of labelled items.
+     * Handles keyDown processing of key-based selection of labelled items.
      * Supported keyboard controls:
      *
      * - If pick list is expanded
@@ -774,7 +763,7 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
      *     - `SHIFT-RIGHT` and `SHIFT-LEFT` will add to the current highlight in the appropriate direction
      *
      * @protected
-	 */
+     */
     onKeyDown: function(e, t) {
         var me = this,
         key = e.getKey(),
@@ -864,10 +853,10 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Handles auto-selection and creation of labelled items based on this field's
+     * Handles auto-selection and creation of labelled items based on this field's
      * delimiter, as well as the keyUp processing of key-based selection of labelled items.
      * @protected
-	 */
+     */
     onKeyUp: function(e, t) {
         var me = this,
         rawValue = me.inputEl.dom.value;
@@ -970,9 +959,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Overridden to get and set the DOM value directly for type-ahead suggestion (bypassing get/setRawValue)
+     * Overridden to get and set the DOM value directly for type-ahead suggestion (bypassing get/setRawValue)
      * @protected
-	 */
+     */
     onTypeAhead: function() {
         var me = this,
         displayField = me.displayField,
@@ -1004,13 +993,13 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Delegation control for selecting and removing labelled items or triggering list collapse/expansion
+     * Delegation control for selecting and removing labelled items or triggering list collapse/expansion
      * @protected
-	 */
+     */
     onItemListClick: function(evt, el, o) {
         var me = this,
-        itemEl = evt.getTarget('.x-boxselect-item'),
-        closeEl = itemEl ? evt.getTarget('.x-boxselect-item-close') : false;
+        itemEl = evt.getTarget('.x-tagfield-item'),
+        closeEl = itemEl ? evt.getTarget('.x-tagfield-item-close') : false;
 
         if (me.readOnly || me.disabled) {
             return;
@@ -1040,10 +1029,10 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Build the markup for the labelled items. Template must be built on demand due to ComboBox initComponent
-	 * lifecycle for the creation of on-demand stores (to account for automatic valueField/displayField setting)
+     * Build the markup for the labelled items. Template must be built on demand due to ComboBox initComponent
+     * lifecycle for the creation of on-demand stores (to account for automatic valueField/displayField setting)
      * @private
-	 */
+     */
     getMultiSelectItemMarkup: function() {
         var me = this;
 
@@ -1058,13 +1047,13 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
 
             me.multiSelectItemTpl = [
             '<tpl for=".">',
-            '<li class="x-tab-default x-boxselect-item ',
+            '<li class="x-tab-default x-tagfield-item ',
             '<tpl if="this.isSelected(values.'+ me.valueField + ')">',
             ' selected',
             '</tpl>',
             '" qtip="{[typeof values === "string" ? values : values.' + me.displayField + ']}">' ,
-            '<div class="x-boxselect-item-text">{[typeof values === "string" ? values : this.getItemLabel(values)]}</div>',
-            '<div class="x-tab-close-btn x-boxselect-item-close"></div>' ,
+            '<div class="x-tagfield-item-text">{[typeof values === "string" ? values : this.getItemLabel(values)]}</div>',
+            '<div class="x-tab-close-btn x-tagfield-item-close"></div>' ,
             '</li>' ,
             '</tpl>',
             {
@@ -1088,9 +1077,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Update the labelled items rendering
+     * Update the labelled items rendering
      * @private
-	 */
+     */
     applyMultiselectItemMarkup: function() {
         var me = this,
         itemList = me.itemList,
@@ -1114,8 +1103,8 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Returns the record from valueStore for the labelled item node
-	 */
+     * Returns the record from valueStore for the labelled item node
+     */
     getRecordByListItemNode: function(itemEl) {
         var me = this,
         itemIdx = 0,
@@ -1138,8 +1127,8 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Toggle of labelled item selection by node reference
-	 */
+     * Toggle of labelled item selection by node reference
+     */
     toggleSelectionByListItemNode: function(itemEl, keepExisting) {
         var me = this,
         rec = me.getRecordByListItemNode(itemEl),
@@ -1158,8 +1147,8 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Removal of labelled item by node reference
-	 */
+     * Removal of labelled item by node reference
+     */
     removeByListItemNode: function(itemEl) {
         var me = this,
         rec = me.getRecordByListItemNode(itemEl);
@@ -1172,9 +1161,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
 
     /**
      * @inheritdoc
-	 * Intercept calls to getRawValue to pretend there is no inputEl for rawValue handling,
-	 * so that we can use inputEl for user input of just the current value.
-	 */
+     * Intercept calls to getRawValue to pretend there is no inputEl for rawValue handling,
+     * so that we can use inputEl for user input of just the current value.
+     */
     getRawValue: function() {
         var me = this,
         inputEl = me.inputEl,
@@ -1187,9 +1176,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
 
     /**
      * @inheritdoc
-	 * Intercept calls to setRawValue to pretend there is no inputEl for rawValue handling,
-	 * so that we can use inputEl for user input of just the current value.
-	 */
+     * Intercept calls to setRawValue to pretend there is no inputEl for rawValue handling,
+     * so that we can use inputEl for user input of just the current value.
+     */
     setRawValue: function(value) {
         var me = this,
         inputEl = me.inputEl,
@@ -1203,9 +1192,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Adds a value or values to the current value of the field
-	 * @param {Mixed} value The value or values to add to the current value, see {@link #setValue}
-	 */
+     * Adds a value or values to the current value of the field
+     * @param {Mixed} value The value or values to add to the current value, see {@link #setValue}
+     */
     addValue: function(value) {
         var me = this;
         if (value) {
@@ -1214,9 +1203,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Removes a value or values from the current value of the field
-	 * @param {Mixed} value The value or values to remove from the current value, see {@link #setValue}
-	 */
+     * Removes a value or values from the current value of the field
+     * @param {Mixed} value The value or values to remove from the current value, see {@link #setValue}
+     */
     removeValue: function(value) {
         var me = this;
 
@@ -1255,7 +1244,7 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
      *
      * @param {Mixed} value The value(s) to be set, see method documentation for details
      * @return {Ext.form.field.Field/Boolean} this, or `false` if asynchronously querying for unknown values
-	 */
+     */
     setValue: function(value, doSelect, skipLoad) {
         var me = this,
         valueStore = me.valueStore,
@@ -1353,9 +1342,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Overridden to clear the input field if we are auto-setting a value as we blur.
+     * Overridden to clear the input field if we are auto-setting a value as we blur.
      * @protected
-	 */
+     */
     mimicBlur: function() {
         var me = this;
 
@@ -1367,8 +1356,8 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Overridden to handle partial-input selections more directly
-	 */
+     * Overridden to handle partial-input selections more directly
+     */
     assertValue: function() {
         var me = this,
         rawValue = me.inputEl.dom.value,
@@ -1391,8 +1380,8 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Expand record values for evaluating change and fire change events for UI to respond to
-	 */
+     * Expand record values for evaluating change and fire change events for UI to respond to
+     */
     checkChange: function() {
         if (!this.suspendCheckChange && !this.isDestroyed) {
             var me = this,
@@ -1453,8 +1442,8 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Overridden to use value (selection) instead of raw value and to avoid the use of placeholder
-	 */
+     * Overridden to use value (selection) instead of raw value and to avoid the use of placeholder
+     */
     applyEmptyText : function() {
         var me = this,
         emptyText = me.emptyText,
@@ -1481,8 +1470,8 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Overridden to use inputEl instead of raw value and to avoid the use of placeholder
-	 */
+     * Overridden to use inputEl instead of raw value and to avoid the use of placeholder
+     */
     preFocus : function(){
         var me = this,
         inputEl = me.inputEl,
@@ -1500,9 +1489,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Intercept calls to onFocus to add focusCls, because the base field
+     * Intercept calls to onFocus to add focusCls, because the base field
      * classes assume this should be applied to inputEl
-	 */
+     */
     onFocus: function() {
         var me = this,
         focusCls = me.focusCls,
@@ -1516,9 +1505,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Intercept calls to onBlur to remove focusCls, because the base field
+     * Intercept calls to onBlur to remove focusCls, because the base field
      * classes assume this should be applied to inputEl
-	 */
+     */
     onBlur: function() {
         var me = this,
         focusCls = me.focusCls,
@@ -1532,9 +1521,9 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
     },
 
     /**
-	 * Intercept calls to renderActiveError to add invalidCls, because the base
+     * Intercept calls to renderActiveError to add invalidCls, because the base
      * field classes assume this should be applied to inputEl
-	 */
+     */
     renderActiveError: function() {
         var me = this,
         invalidCls = me.invalidCls,
@@ -1581,72 +1570,5 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
                 delete me.autoSizing;
             }
         }
-    }
-});
-
-/**
- * Ensures the input element takes up the maximum amount of remaining list width,
- * or the entirety of the list width if too little space remains. In this case,
- * the list height will be automatically increased to accomodate the new line. This
- * growth will not occur if {@link Ext.ux.form.field.BoxSelect#multiSelect} or
- * {@link Ext.ux.form.field.BoxSelect#grow} is false.
- */
-Ext.define('Ext.ux.layout.component.field.BoxSelectField', {
-    /* Begin Definitions */
-    alias: ['layout.boxselectfield'],
-    extend: 'Ext.layout.component.field.Trigger',
-
-    /* End Definitions */
-
-    type: 'boxselectfield',
-
-    /*For proper calculations we need our field to be sized.*/
-    waitForOuterWidthInDom:true,
-
-    beginLayout: function(ownerContext) {
-        var me = this,
-            owner = me.owner;
-
-        me.callParent(arguments);
-
-        ownerContext.inputElCtContext = ownerContext.getEl('inputElCt');
-        owner.inputElCt.setStyle('width','');
-
-        me.skipInputGrowth = !owner.grow || !owner.multiSelect;
-    },
-
-    beginLayoutFixed: function(ownerContext, width, suffix) {
-        var me = this,
-            owner = ownerContext.target;
-
-        owner.triggerEl.setStyle('height', '24px');
-
-        me.callParent(arguments);
-
-        if (ownerContext.heightModel.fixed && ownerContext.lastBox) {
-            owner.listWrapper.setStyle('height', ownerContext.lastBox.height+'px');
-            owner.itemList.setStyle('height', '100%');
-        }
-        /*No inputElCt calculations here!*/
-    },
-
-    /*Calculate and cache value of input container.*/
-    publishInnerWidth:function(ownerContext) {
-        var me = this,
-            owner = me.owner,
-            width = owner.itemList.getWidth(true) - 10,
-            lastEntry = owner.inputElCt.prev(null, true);
-
-        if (lastEntry && !owner.stacked) {
-            lastEntry = Ext.fly(lastEntry);
-            width = width - lastEntry.getOffsetsTo(lastEntry.up(''))[0] - lastEntry.getWidth();
-        }
-
-        if (!me.skipInputGrowth && (width < 35)) {
-            width = width - 10;
-        } else if (width < 1) {
-            width = 1;
-        }
-        ownerContext.inputElCtContext.setWidth(width);
     }
 });
